@@ -1,0 +1,16 @@
+2016-11-20 16:37:10.356 (PID: 11440) INFO sampleProducer - kclnodejssample stream doesn't exist. Created a new stream with that name ..
+2016-11-20 16:37:10.788 (PID: 11440) INFO sampleProducer - Current status of the stream is CREATING.
+2016-11-20 16:37:16.252 (PID: 11440) INFO sampleProducer - Current status of the stream is CREATING.
+2016-11-20 16:37:21.691 (PID: 11440) INFO sampleProducer - Current status of the stream is CREATING.
+2016-11-20 16:37:27.122 (PID: 11440) INFO sampleProducer - Current status of the stream is CREATING.
+2016-11-20 16:37:32.561 (PID: 11440) INFO sampleProducer - Current status of the stream is ACTIVE.
+2016-11-20 16:37:32.930 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.959 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.963 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.965 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.968 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.968 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.969 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.972 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.974 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
+2016-11-20 16:37:32.976 (PID: 11440) INFO sampleProducer - Successfully sent data to Kinesis.
