@@ -168,7 +168,9 @@ function sampleProducer(kinesis, config) {
 								StreamName : config.stream
 							};
 
-							 setTimeout(_writeToKinesis(recordParams), 1000);
+							 setTimeout(function(){
+								 _writeToKinesis(recordParams,done)}, 1000);
+							 }
 
 						});
 
