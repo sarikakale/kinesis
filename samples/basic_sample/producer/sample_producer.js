@@ -115,9 +115,9 @@ function sampleProducer(kinesis, config) {
 
 	}
 
-	function _writeToKinesis() {
+	function _writeToKinesis(recordParams) {
 
-		var currTime = new Date().getMilliseconds();
+		/*var currTime = new Date().getMilliseconds();
 		var sensor = 'sensor-' + Math.floor(Math.random() * 100000);
 		var reading = Math.floor(Math.random() * 1000000);
 
@@ -131,7 +131,7 @@ function sampleProducer(kinesis, config) {
 			Data : record,
 			PartitionKey : sensor,
 			StreamName : config.stream
-		};
+		};*/
 
 		kinesis.putRecord(recordParams, function(err, data) {
 			if (err) {
@@ -150,10 +150,38 @@ function sampleProducer(kinesis, config) {
 					return;
 				}
 				var count = 0;
+				fs.readFile(filename, function(err, data) {
+
+					if (err) {
+						throw err;
+					} else {
+
+						//csv file will be parsed record by record
+						converter.on("record_parsed", function(jsonObj) {
+							jsonObj.carbonMonoOxide = (Math.random());
+							jsonObj.carbonDiOxide = (Math.random());
+							console.log(jsonObj)
+							var record = JSON.stringify(jsonObj);
+							var recordParams = {
+								Data : record,
+								PartitionKey : jsonObj.time,
+								StreamName : config.stream
+							};
+
+							 setTimeout(_writeToKinesis(recordParams), 1000);
+
+						});
+
+						// read from file
+						fs.createReadStream(filename).pipe(converter);
+
+					}
+
+				})
 
 				// while (count < data_array.length) {
 				// setTimeout(_writeToKinesis(), 1000);
-				setTimeout(dataStream(), 1000);
+				//setTimeout(dataStream(), 1000);
 				// count++;
 				// }
 			});
