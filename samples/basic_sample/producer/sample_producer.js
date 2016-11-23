@@ -169,7 +169,7 @@ function sampleProducer(kinesis, config) {
 							};
 
 							 setTimeout(function(){
-								 _writeToKinesis(recordParams,done)}, 1000);
+								 _writeToKinesis(recordParams)}, 1000);
 							 
 					
 						});
