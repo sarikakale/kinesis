@@ -170,8 +170,8 @@ function sampleProducer(kinesis, config) {
 
 							 setTimeout(function(){
 								 _writeToKinesis(recordParams,done)}, 1000);
-							 }
-
+							 
+					
 						});
 
 						// read from file
