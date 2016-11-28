@@ -240,6 +240,34 @@ function sampleProducer(kinesis, config) {
 									
 									anomalyTrack = anomalies[Math.floor(Math.random() * anomalies.length)];
 									
+									cityTrack = (cityTrack % cityLen) + 1;
+
+									if (cities[cityTrack - 1] === "New York") {
+										nyTrack = (nyTrack % nyLen) + 1;
+										trackLat = NYlatitudes[nyTrack - 1];
+										trackLong = NYlongitudes[nyTrack - 1];
+										sensorTrack = NYSensors[nyTrack-1];
+										var date = new Date();
+										dateT = new Date().toMysqlFormat(date)
+										sleep.sleep(10);
+									}
+									if (cities[cityTrack - 1] === "San Fransisco") {
+										sfTrack = (sfTrack % sfLen) + 1;
+										trackLat = SFlatitudes[sfTrack - 1];
+										trackLong = SFlongitudes[sfTrack - 1];
+										sensorTrack = SFSensors[sfTrack - 1];
+									}
+
+									if (cities[cityTrack - 1] == "Arizona City") {
+										azTrack = (azTrack % azLen) + 1;
+										trackLat = AZlatitudes[azTrack - 1];
+										trackLong = AZlongitudes[azTrack - 1];
+										sensorTrack = AZSensors[azTrack - 1];
+										anomalyTrack = "fire";
+									}
+
+									
+									
 									console.log(anomalyTrack);
 									if(anomalyTrack === "fire"){
 										
@@ -278,31 +306,7 @@ function sampleProducer(kinesis, config) {
 									
 									
 									
-									cityTrack = (cityTrack % cityLen) + 1;
-
-									if (cities[cityTrack - 1] === "New York") {
-										nyTrack = (nyTrack % nyLen) + 1;
-										trackLat = NYlatitudes[nyTrack - 1];
-										trackLong = NYlongitudes[nyTrack - 1];
-										sensorTrack = NYSensors[nyTrack-1];
-										var date = new Date();
-										dateT = new Date().toMysqlFormat(date)
-									//	sleep.sleep(1);
-									}
-									if (cities[cityTrack - 1] === "San Fransisco") {
-										sfTrack = (sfTrack % sfLen) + 1;
-										trackLat = SFlatitudes[sfTrack - 1];
-										trackLong = SFlongitudes[sfTrack - 1];
-										sensorTrack = SFSensors[sfTrack - 1];
-									}
-
-									if (cities[cityTrack - 1] == "Arizona City") {
-										azTrack = (azTrack % azLen) + 1;
-										trackLat = AZlatitudes[azTrack - 1];
-										trackLong = AZlongitudes[azTrack - 1];
-										sensorTrack = AZSensors[azTrack - 1];
-									}
-
+									
 									var date = new Date();
 									var aggregationParams={ 
 										"sensorName":sensorTrack[0], 
