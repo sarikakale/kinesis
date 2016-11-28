@@ -54,6 +54,7 @@ function recordProcessor() {
         sequenceNumber = record.sequenceNumber;
         partitionKey = record.partitionKey;
         log.info(util.format('ShardID: %s, Record: %s, SeqenceNumber: %s, PartitionKey:%s', shardId, data, sequenceNumber, partitionKey));
+        console.log("Data"+data)
       }
       if (!sequenceNumber) {
         completeCallback();

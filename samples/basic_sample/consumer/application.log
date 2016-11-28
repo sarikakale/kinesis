@@ -1,1 +1,1 @@
-s
+2016-11-27 18:11:50.760 (PID: 16164) INFO recordProcessor - ShardID: shardId-000000000001, Record: {"latitude":32.901836,"longitude":-111.742252,"city":"Arizona City","timestamp":"2016-10-27 18-10-45","temperature":27.29,"CO2":44,"CO":13,"NO":9,"O3":35,"humidity":86.93,"precipitation":28.6,"windDirection":"249.90","windSpeed":7.2}, SeqenceNumber: 49567923962222185185254717940141855153621137275381350418, PartitionKey:2016-10-27 18-10-45

@@ -17,12 +17,18 @@ permissions and limitations under the License.
 
 var config = module.exports = {
   kinesis : {
-    region : 'us-east-1'
+    region : 'us-west-2'
   },
 
   sampleProducer : {
     stream : 'kclnodejssample',
     shards : 2,
     waitBetweenDescribeCallsInSeconds : 5
+  },
+  
+  anomalyProducer :{
+	  stream : 'anomalyproducer',
+	    shards : 2,
+	    waitBetweenDescribeCallsInSeconds : 5
   }
 };
