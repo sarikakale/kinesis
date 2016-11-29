@@ -132,6 +132,8 @@ function sampleProducer(kinesis, config) {
 
 	function _writeToKinesis(recordParams) {
 		
+		
+		
 		kinesis.putRecord(recordParams, function(err, data) {
 			if (err) {
 				console.log("Error"+err);
@@ -150,14 +152,19 @@ function sampleProducer(kinesis, config) {
 					log.error(util.format('Error creating stream: %s', err));
 					return;
 				}
+				
+				
+				var i = 0;
 				if (config.stream === "kclnodejssample") {
-					var count = 0;
+																																																																																																																																																																																																var dateT ;
+					var date = new Date();
+					while(i < 2){
 					fs.readFile(filename, function(err, data) {
 
 						if (err) {
 							throw err;
 						} else {
-							var dateT ;	
+							
 							// csv file will be parsed record by record
 							converter.on("record_parsed", function(jsonObj) {
 								cityTrack = (cityTrack % cityLen) + 1;
@@ -166,9 +173,9 @@ function sampleProducer(kinesis, config) {
 									nyTrack = (nyTrack % nyLen) + 1;
 									trackLat = NYlatitudes[0];
 									trackLong = NYlongitudes[0];
-									var date = new Date();
-									dateT = new Date().toMysqlFormat(date)
-									sleep.sleep(1);
+									date.setSeconds(date.getSeconds()+1);
+									dateT = new Date().toMysqlFormat(date);
+									
 								}
 								if (cities[cityTrack - 1] === "San Fransisco") {
 									sfTrack = (sfTrack % sfLen) + 1;
@@ -201,6 +208,7 @@ function sampleProducer(kinesis, config) {
 									"windSpeed" : jsonObj.windSpeed
 								};
 								
+								console.log(i);
 								
 								var record = JSON.stringify(aggregationParams);
 								var recordParams = {
@@ -210,25 +218,27 @@ function sampleProducer(kinesis, config) {
 								};
 								
 								
-								
 								setTimeout(function() {
 									_writeToKinesis(recordParams)
 								}, 1000);
-
+								
 							});
 							// read from file
 							fs.createReadStream(filename).pipe(converter);
 
 						}
-
+						
 					})
+					
+					i++;
+					}
 
 				}else{
 					
 					if(config.stream === "anomalyproducer"){
 						
 						var tracktemp = 0, dateT, co =  0 , no=0 , co2 = 0, sensorTrack = {}, o3 = 0, anomalyTrack = 0, precipitation = 0, ws = 0, humidity = 0;
-						
+						var date = new Date();
 						fs.readFile(filename, function(err, data) {
 
 							if (err) {
@@ -247,9 +257,10 @@ function sampleProducer(kinesis, config) {
 										trackLat = NYlatitudes[nyTrack - 1];
 										trackLong = NYlongitudes[nyTrack - 1];
 										sensorTrack = NYSensors[nyTrack-1];
-										var date = new Date();
-										dateT = new Date().toMysqlFormat(date)
-										sleep.sleep(10);
+										
+										date.setSeconds(date.getSeconds()+1);
+									dateT = new Date().toMysqlFormat(date);
+									
 									}
 									if (cities[cityTrack - 1] === "San Fransisco") {
 										sfTrack = (sfTrack % sfLen) + 1;
