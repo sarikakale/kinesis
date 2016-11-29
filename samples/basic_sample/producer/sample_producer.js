@@ -133,13 +133,15 @@ function sampleProducer(kinesis, config) {
 	function _writeToKinesis(recordParams) {
 		
 		
-		
 		kinesis.putRecord(recordParams, function(err, data) {
 			if (err) {
 				console.log("Error"+err);
 				log.error(err);
 			} else {
-				console.log("Success");
+						console.log("Inside Kinesis");
+						
+						console.log(JSON.parse(recordParams.Data).timestamp);
+
 				log.info('Successfully sent data to Kinesis.');
 			}
 		});
@@ -158,7 +160,7 @@ function sampleProducer(kinesis, config) {
 				if (config.stream === "kclnodejssample") {
 																																																																																																																																																																																																var dateT ;
 					var date = new Date();
-					while(i < 2){
+					while(i<2){
 					fs.readFile(filename, function(err, data) {
 
 						if (err) {
@@ -167,6 +169,7 @@ function sampleProducer(kinesis, config) {
 							
 							// csv file will be parsed record by record
 							converter.on("record_parsed", function(jsonObj) {
+								console.log("***Read a record***");
 								cityTrack = (cityTrack % cityLen) + 1;
 								
 								if (cities[cityTrack - 1] === "New York") {
@@ -174,8 +177,7 @@ function sampleProducer(kinesis, config) {
 									trackLat = NYlatitudes[0];
 									trackLong = NYlongitudes[0];
 									date.setSeconds(date.getSeconds()+1);
-									dateT = new Date().toMysqlFormat(date);
-									
+									dateT = new Date().toMysqlFormat(date);									
 								}
 								if (cities[cityTrack - 1] === "San Fransisco") {
 									sfTrack = (sfTrack % sfLen) + 1;
@@ -207,20 +209,20 @@ function sampleProducer(kinesis, config) {
 											.toFixed(2),
 									"windSpeed" : jsonObj.windSpeed
 								};
-								
-								console.log(i);
-								
+																
 								var record = JSON.stringify(aggregationParams);
 								var recordParams = {
 									Data : record,
-									PartitionKey : aggregationParams.timestamp,
+									PartitionKey : 'shardId-000000000000',
 									StreamName : config.stream
 								};
 								
 								
-								setTimeout(function() {
-									_writeToKinesis(recordParams)
-								}, 1000);
+								
+									_writeToKinesis(recordParams);
+									//console.log("*Sleepiog***");
+									//sleep.sleep(1);
+								
 								
 							});
 							// read from file

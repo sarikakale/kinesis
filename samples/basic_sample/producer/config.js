@@ -22,13 +22,13 @@ var config = module.exports = {
 
   sampleProducer : {
     stream : 'kclnodejssample',
-    shards : 2,
+    shards : 1,
     waitBetweenDescribeCallsInSeconds : 5
   },
   
   anomalyProducer :{
 	  stream : 'anomalyproducer',
-	    shards : 2,
+	    shards : 1,
 	    waitBetweenDescribeCallsInSeconds : 5
   }
 };
